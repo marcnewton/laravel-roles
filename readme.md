@@ -97,18 +97,25 @@ Add the package to your application service providers in `config/app.php` file.
 ],
 ```
 
-### Publish All Assets
+### Publish all assets
+Typical usage for first time installation.
 ```bash
-    php artisan vendor:publish --tag=laravelroles
+php artisan vendor:publish --tag=laravelroles
 ```
 
-### Publish Specific Assets
+### Publish update safe assets
+Migrations and Language assets only.
 ```bash
-    php artisan vendor:publish --tag=laravelroles-config
-    php artisan vendor:publish --tag=laravelroles-migrations
-    php artisan vendor:publish --tag=laravelroles-seeds
-    php artisan vendor:publish --tag=laravelroles-views
-    php artisan vendor:publish --tag=laravelroles-lang
+php artisan vendor:publish --tag=laravelroles-update
+```
+
+### Publish specific assets
+```bash
+php artisan vendor:publish --tag=laravelroles-configs
+php artisan vendor:publish --tag=laravelroles-migrations
+php artisan vendor:publish --tag=laravelroles-seeds
+php artisan vendor:publish --tag=laravelroles-views
+php artisan vendor:publish --tag=laravelroles-lang
 ```
 
 ### HasRoleAndPermission Trait And Contract
@@ -145,7 +152,7 @@ class User extends Authenticatable
 
 1. Setup the needed tables:
 
-    `php artisan migrate`
+`php artisan migrate`
 
 2. Update `database\seeds\DatabaseSeeder.php` to include the seeds. See example below.
 

@@ -13,9 +13,9 @@ class TestCase extends OrchestraTestCase
      *
      * @param \Illuminate\Foundation\Application $app
      *
-     * @return jeremykenedy\LaravelRoles\RolesServiceProvider
+     * @return array
      */
-    protected function getPackageProviders($app): void
+    protected function getPackageProviders(): array
     {
         return [RolesServiceProvider::class];
     }
@@ -23,11 +23,9 @@ class TestCase extends OrchestraTestCase
     /**
      * Load package alias.
      *
-     * @param \Illuminate\Foundation\Application $app
-     *
      * @return array
      */
-    protected function getPackageAliases($app): void
+    protected function getPackageAliases(): array
     {
         return [
             'laravelroles' => RolesFacade::class,
