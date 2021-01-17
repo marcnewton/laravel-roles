@@ -157,7 +157,7 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
 
 `php artisan migrate`
 
-2. Update `database\seeds\DatabaseSeeder.php` to include the seeds. See example below.
+2. Update `database\seeders\DatabaseSeeder.php` to include the seeds. See example below.
 
 
 ```php
