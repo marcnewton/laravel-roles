@@ -13,7 +13,7 @@ A Powerful package for handling roles and permissions in Laravel. Supports Larav
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![MadeWithLaravel.com shield](https://madewithlaravel.com/storage/repo-shields/1363-shield.svg)](https://madewithlaravel.com/p/laravel-roles/shield-link)
 
-#### Table of contents
+## Table of contents
 - [Features](#features)
 - [Installation](#installation)
     - [Composer](#composer)
@@ -64,7 +64,6 @@ This package is very easy to set up. There are only couple of steps.
 From your projects root folder in terminal run:
 
 Laravel 5.8 and up use:
-
 ```
     composer require jeremykenedy/laravel-roles
 ```
@@ -75,27 +74,32 @@ Laravel 5.7 and below use:
     composer require jeremykenedy/laravel-roles:1.4.0
 ```
 
-* Note: The major difference is that Laravel's users table migration out the box changed from `$table->increments('id');` to `$table->bigIncrements('id');` in Laravel 5.8.
+### Special Note
+
+> Laravel 5.8 onwards, the users table migration changed from `$table->increments('id');` to `$table->bigIncrements('id');`.
 
 ### Service Provider
-* Laravel 5.5 and up
-Uses package auto discovery feature, no need to edit the `config/app.php` file.
 
-* Laravel 5.4 and below
-Add the package to your application service providers in `config/app.php` file.
+* Laravel 5.5 or higher:
+  
+    > Uses package auto discovery feature, no need to edit the `config/app.php` file.
 
-```php
-'providers' => [
+* Laravel 5.4 or lower
+  
+    > Add the package to your application service providers in `config/app.php` file.
 
-    ...
-
-    /**
-     * Third Party Service Providers...
-     */
-    jeremykenedy\LaravelRoles\RolesServiceProvider::class,
-
-],
-```
+    ```php
+    'providers' => [
+    
+        ...
+    
+        /**
+         * Third Party Service Providers...
+         */
+        jeremykenedy\LaravelRoles\RolesServiceProvider::class,
+    
+    ],
+    ```
 
 ### Publish all assets
 Typical usage for first time installation.
@@ -127,24 +131,23 @@ php artisan vendor:publish --tag=laravelroles-lang
 Example `User` model Trait And Contract:
 
 ```php
+namespace App\Models;
 
-<?php
-
-namespace App;
-
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Notifications\Notifiable;
-use jeremykenedy\LaravelRoles\Traits\HasRoleAndPermission;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
+use jeremykenedy\LaravelRoles\{
+    Traits\HasRoleAndPermission,
+    Contracts\HasRoleAndPermission AS HasRoleAndPermissionContract
+};
 
-class User extends Authenticatable
+class User extends Authenticatable implements HasRoleAndPermissionContract
 {
-    use Notifiable;
-    use HasRoleAndPermission;
+    use HasFactory, Notifiable, HasRoleAndPermission;
 
     // rest of your model ...
 }
-
 ```
 
 ### Migrations and seeds
