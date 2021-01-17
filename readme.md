@@ -161,13 +161,7 @@ class User extends Authenticatable implements HasRoleAndPermissionContract
 
 
 ```php
-<?php
-
 use Illuminate\Database\Seeder;
-use Illuminate\Database\Eloquent\Model;
-use Database\Seeders\PermissionsTableSeeder
-use Database\Seeders\RolesTableSeeder;
-use Database\Seeders\ConnectRelationshipsSeeder;
 
 class DatabaseSeeder extends Seeder
 {
@@ -178,17 +172,12 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        Model::unguard();
-
-            $this->call(PermissionsTableSeeder::class);
-            $this->call(RolesTableSeeder::class);
-            $this->call(ConnectRelationshipsSeeder::class);
-            //$this->call('UsersTableSeeder');
-
-        Model::reguard();
+        $this->call(PermissionsTableSeeder::class);
+        $this->call(RolesTableSeeder::class);
+        $this->call(ConnectRelationshipsSeeder::class);
+        $this->call(UsersTableSeeder::class);
     }
 }
-
 ```
 
 3. Seed an initial set of Permissions, Roles, and Users with roles.
