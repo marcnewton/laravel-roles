@@ -174,8 +174,8 @@ class DatabaseSeeder extends Seeder
     {
         $this->call(PermissionsTableSeeder::class);
         $this->call(RolesTableSeeder::class);
-        $this->call(ConnectRelationshipsSeeder::class);
         $this->call(UsersTableSeeder::class);
+        $this->call(ConnectRelationshipsSeeder::class);
     }
 }
 ```
@@ -465,19 +465,27 @@ There are four Blade extensions. Basically, it is replacement for classic if sta
 @role('admin') // @if(Auth::check() && Auth::user()->hasRole('admin'))
     // user has admin role
 @endrole
+````
 
+```php
 @permission('edit.articles') // @if(Auth::check() && Auth::user()->hasPermission('edit.articles'))
     // user has edit articles permissison
 @endpermission
+```
 
+```php
 @level(2) // @if(Auth::check() && Auth::user()->level() >= 2)
     // user has level 2 or higher
 @endlevel
+```
 
+```php
 @allowed('edit', $article) // @if(Auth::check() && Auth::user()->allowed('edit', $article))
     // show edit button
 @endallowed
+```
 
+```php
 @role('admin|moderator', true) // @if(Auth::check() && Auth::user()->hasRole('admin|moderator', true))
     // user has admin and moderator role
 @else
@@ -518,23 +526,30 @@ Now you can easily protect your routes.
 Route::get('/', function () {
     //
 })->middleware('role:admin');
+```
 
+```php
 Route::get('/', function () {
     //
 })->middleware('permission:edit.articles');
+```
 
+```php
 Route::get('/', function () {
     //
 })->middleware('level:2'); // level >= 2
+```
 
+```php
 Route::get('/', function () {
     //
 })->middleware('role:admin', 'level:2'); // level >= 2 and Admin
+```
 
+```php
 Route::group(['middleware' => ['role:admin']], function () {
     //
 });
-
 ```
 
 It throws `\jeremykenedy\LaravelRoles\App\Exceptions\RoleDeniedException`, `\jeremykenedy\LaravelRoles\App\Exceptions\PermissionDeniedException` or `\jeremykenedy\LaravelRoles\App\Exceptions\LevelDeniedException` exceptions if it goes wrong.
@@ -667,24 +682,6 @@ return [
     */
     'defaultMigrations' => [
         'enabled'        => env('ROLES_MIGRATION_DEFAULT_ENABLED', false),
-    ],
-
-    /*
-    |--------------------------------------------------------------------------
-    | Default Seeds
-    |--------------------------------------------------------------------------
-    |
-    | These are the default package seeds. You can seed the package built
-    | in seeds without having to seed them. These seed directly from
-    | the package. These are not the published seeds.
-    |
-    */
-
-    'defaultSeeds' => [
-        'PermissionsTableSeeder'        => env('ROLES_SEED_DEFAULT_PERMISSIONS', true),
-        'RolesTableSeeder'              => env('ROLES_SEED_DEFAULT_ROLES', true),
-        'ConnectRelationshipsSeeder'    => env('ROLES_SEED_DEFAULT_RELATIONSHIPS', true),
-        'UsersTableSeeder'              => env('ROLES_SEED_DEFAULT_USERS', false),
     ],
 
     /*

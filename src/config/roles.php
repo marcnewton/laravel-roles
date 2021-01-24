@@ -97,23 +97,6 @@ return [
     'defaultMigrations' => [
         'enabled'        => env('ROLES_MIGRATION_DEFAULT_ENABLED', false),
     ],
-    /*
-    |--------------------------------------------------------------------------
-    | Default Seeds
-    |--------------------------------------------------------------------------
-    |
-    | These are the default package seeds. You can seed the package built
-    | in seeds without having to seed them. These seed directly from
-    | the package. These are not the published seeds.
-    |
-    */
-
-    'defaultSeeds' => [
-        'PermissionsTableSeeder'        => env('ROLES_SEED_DEFAULT_PERMISSIONS', true),
-        'RolesTableSeeder'              => env('ROLES_SEED_DEFAULT_ROLES', true),
-        'ConnectRelationshipsSeeder'    => env('ROLES_SEED_DEFAULT_RELATIONSHIPS', true),
-        'UsersTableSeeder'              => env('ROLES_SEED_DEFAULT_USERS', false),
-    ],
 
     /*
     |--------------------------------------------------------------------------

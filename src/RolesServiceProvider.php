@@ -8,11 +8,7 @@ use jeremykenedy\LaravelRoles\
 {
     App\Http\Middleware\VerifyLevel,
     App\Http\Middleware\VerifyPermission,
-    App\Http\Middleware\VerifyRole,
-    Database\Seeders\DefaultConnectRelationshipsSeeder,
-    Database\Seeders\DefaultPermissionsTableSeeder,
-    Database\Seeders\DefaultRolesTableSeeder,
-    Database\Seeders\DefaultUsersTableSeeder,
+    App\Http\Middleware\VerifyRole
 };
 
 class RolesServiceProvider extends ServiceProvider
@@ -66,7 +62,6 @@ class RolesServiceProvider extends ServiceProvider
     {
         if ($this->app->runningInConsole())
         {
-            $this->loadSeedsFrom();
             $this->publishAssets();
         }
     }
@@ -116,42 +111,6 @@ class RolesServiceProvider extends ServiceProvider
         if (config('roles.rolesGuiEnabled'))
         {
             $this->loadViewsFrom(__DIR__ . '/resources/views/', $this->_packageTag);
-        }
-    }
-
-    /**
-     * Loads seeds.
-     *
-     * @return void
-     */
-    private function loadSeedsFrom()
-    {
-        if (config('roles.defaultSeeds.PermissionsTableSeeder'))
-        {
-            $this->app['seed.handler']->register(
-                DefaultPermissionsTableSeeder::class
-            );
-        }
-
-        if (config('roles.defaultSeeds.RolesTableSeeder'))
-        {
-            $this->app['seed.handler']->register(
-                DefaultRolesTableSeeder::class
-            );
-        }
-
-        if (config('roles.defaultSeeds.ConnectRelationshipsSeeder'))
-        {
-            $this->app['seed.handler']->register(
-                DefaultConnectRelationshipsSeeder::class
-            );
-        }
-
-        if (config('roles.defaultSeeds.UsersTableSeeder'))
-        {
-            $this->app['seed.handler']->register(
-                DefaultUsersTableSeeder::class
-            );
         }
     }
 
