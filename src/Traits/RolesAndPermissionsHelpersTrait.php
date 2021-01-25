@@ -129,8 +129,8 @@ trait RolesAndPermissionsHelpersTrait
     {
         $item = config('roles.models.permission')::onlyTrashed()->where('id', $id)->get();
         if (count($item) != 1) {
-            return abort(redirect('laravelroles::roles.index')
-                            ->with('error', trans('laravelroles::laravelroles.errors.errorDeletedPermissionNotFound')));
+            return abort(redirect('laravel-roles::roles.index')
+                            ->with('error', trans('laravel-roles::admin.errors.errorDeletedPermissionNotFound')));
         }
 
         return $item[0];
@@ -147,8 +147,8 @@ trait RolesAndPermissionsHelpersTrait
     {
         $item = config('roles.models.role')::onlyTrashed()->where('id', $id)->get();
         if (count($item) != 1) {
-            return abort(redirect('laravelroles::roles.index')
-                            ->with('error', trans('laravelroles::laravelroles.errors.errorDeletedRoleNotFound')));
+            return abort(redirect('laravel-roles::roles.index')
+                            ->with('error', trans('laravel-roles::admin.errors.errorDeletedRoleNotFound')));
         }
 
         return $item[0];
@@ -454,11 +454,9 @@ trait RolesAndPermissionsHelpersTrait
             'sortedPermissionsRolesUsers'        => $sortedPermissionsRolesUsers,
         ];
 
-        $view = 'laravelroles::laravelroles.crud.dashboard';
-
         return [
             'data' => $data,
-            'view' => $view,
+            'view' => 'laravel-roles::crud.dashboard',
         ];
     }
 

@@ -24,7 +24,7 @@ class LaravelpermissionsDeletedController extends Controller
             'deletedPermissions' => $deletedPermissions,
         ];
 
-        return view('laravelroles::laravelroles.crud.permissions.deleted.index', $data);
+        return view('laravel-roles::crud.permissions.deleted.index', $data);
     }
 
     /**
@@ -39,7 +39,7 @@ class LaravelpermissionsDeletedController extends Controller
         $item = $this->getDeletedPermissionAndDetails($id);
         $typeDeleted = 'deleted';
 
-        return view('laravelroles::laravelroles.crud.permissions.show', compact('item', 'typeDeleted'));
+        return view('laravel-roles::crud.permissions.show', compact('item', 'typeDeleted'));
     }
 
     /**
@@ -54,12 +54,12 @@ class LaravelpermissionsDeletedController extends Controller
         $deletedPermissions = $this->restoreAllTheDeletedPermissions();
 
         if ($deletedPermissions['status'] === 'success') {
-            return redirect()->route('laravelroles::roles.index')
-                        ->with('success', trans_choice('laravelroles::laravelroles.flash-messages.successRestoredAllPermissions', $deletedPermissions['count'], ['count' => $deletedPermissions['count']]));
+            return redirect()->route('laravel-roles::roles.index')
+                        ->with('success', trans_choice('laravel-roles::flash-messages.successRestoredAllPermissions', $deletedPermissions['count'], ['count' => $deletedPermissions['count']]));
         }
 
-        return redirect()->route('laravelroles::roles.index')
-                    ->with('error', trans('laravelroles::laravelroles.flash-messages.errorRestoringAllPermissions'));
+        return redirect()->route('laravel-roles::roles.index')
+                    ->with('error', trans('laravel-roles::admin.flash-messages.errorRestoringAllPermissions'));
     }
 
     /**
@@ -74,8 +74,8 @@ class LaravelpermissionsDeletedController extends Controller
     {
         $permission = $this->restoreDeletedPermission($id);
 
-        return redirect()->route('laravelroles::roles.index')
-                    ->with('success', trans('laravelroles::laravelroles.flash-messages.successRestoredPermission', ['permission' => $permission->name]));
+        return redirect()->route('laravel-roles::roles.index')
+                    ->with('success', trans('laravel-roles::admin.flash-messages.successRestoredPermission', ['permission' => $permission->name]));
     }
 
     /**
@@ -90,12 +90,12 @@ class LaravelpermissionsDeletedController extends Controller
         $deletedPermissions = $this->destroyAllTheDeletedPermissions();
 
         if ($deletedPermissions['status'] === 'success') {
-            return redirect()->route('laravelroles::roles.index')
-                        ->with('success', trans_choice('laravelroles::laravelroles.flash-messages.successDestroyedAllPermissions', $deletedPermissions['count'], ['count' => $deletedPermissions['count']]));
+            return redirect()->route('laravel-roles::roles.index')
+                        ->with('success', trans_choice('laravel-roles::flash-messages.successDestroyedAllPermissions', $deletedPermissions['count'], ['count' => $deletedPermissions['count']]));
         }
 
-        return redirect()->route('laravelroles::roles.index')
-                    ->with('error', trans('laravelroles::laravelroles.flash-messages.errorDestroyingAllPermissions'));
+        return redirect()->route('laravel-roles::roles.index')
+                    ->with('error', trans('laravel-roles::admin.flash-messages.errorDestroyingAllPermissions'));
     }
 
     /**
@@ -109,7 +109,7 @@ class LaravelpermissionsDeletedController extends Controller
     {
         $permission = $this->destroyPermission($id);
 
-        return redirect()->route('laravelroles::roles.index')
-                    ->with('success', trans('laravelroles::laravelroles.flash-messages.successDestroyedPermission', ['permission' => $permission->name]));
+        return redirect()->route('laravel-roles::roles.index')
+                    ->with('success', trans('laravel-roles::admin.flash-messages.successDestroyedPermission', ['permission' => $permission->name]));
     }
 }

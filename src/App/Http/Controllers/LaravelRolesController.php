@@ -37,7 +37,7 @@ class LaravelRolesController extends Controller
         $service = new RoleFormFields();
         $data = $service->handle();
 
-        return view('laravelroles::laravelroles.crud.roles.create', $data);
+        return view('laravel-roles::crud.roles.create', $data);
     }
 
     /**
@@ -53,8 +53,8 @@ class LaravelRolesController extends Controller
         $rolePermissions = $request->get('permissions');
         $role = $this->storeRoleWithPermissions($roleData, $rolePermissions);
 
-        return redirect()->route('laravelroles::roles.index')
-                            ->with('success', trans('laravelroles::laravelroles.flash-messages.role-create', ['role' => $role->name]));
+        return redirect()->route('laravel-roles::roles.index')
+                            ->with('success', trans('laravel-roles::admin.flash-messages.role-create', ['role' => $role->name]));
     }
 
     /**
@@ -68,7 +68,7 @@ class LaravelRolesController extends Controller
     {
         $item = $this->getRole($id);
 
-        return view('laravelroles::laravelroles.crud.roles.show', compact('item'));
+        return view('laravel-roles::crud.roles.show', compact('item'));
     }
 
     /**
@@ -83,7 +83,7 @@ class LaravelRolesController extends Controller
         $service = new RoleFormFields($id);
         $data = $service->handle();
 
-        return view('laravelroles::laravelroles.crud.roles.edit', $data);
+        return view('laravel-roles::crud.roles.edit', $data);
     }
 
     /**
@@ -100,8 +100,8 @@ class LaravelRolesController extends Controller
         $rolePermissions = $request->get('permissions');
         $role = $this->updateRoleWithPermissions($id, $roleData, $rolePermissions);
 
-        return redirect()->route('laravelroles::roles.index')
-            ->with('success', trans('laravelroles::laravelroles.flash-messages.role-updated', ['role' => $role->name]));
+        return redirect()->route('laravel-roles::roles.index')
+            ->with('success', trans('laravel-roles::admin.flash-messages.role-updated', ['role' => $role->name]));
     }
 
     /**
@@ -115,7 +115,7 @@ class LaravelRolesController extends Controller
     {
         $role = $this->deleteRole($id);
 
-        return redirect(route('laravelroles::roles.index'))
-                    ->with('success', trans('laravelroles::laravelroles.flash-messages.successDeletedItem', ['type' => 'Role', 'item' => $role->name]));
+        return redirect(route('laravel-roles::roles.index'))
+                    ->with('success', trans('laravel-roles::admin.flash-messages.successDeletedItem', ['type' => 'Role', 'item' => $role->name]));
     }
 }

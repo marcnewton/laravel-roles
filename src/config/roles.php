@@ -110,7 +110,7 @@ return [
     */
 
     // Enable Optional Roles Gui
-    'rolesGuiEnabled'               => env('ROLES_GUI_ENABLED', false),
+    'rolesGuiEnabled'               => env('ROLES_GUI_ENABLED', true),
 
     // Enable `auth` middleware
     'rolesGuiAuthEnabled'           => env('ROLES_GUI_AUTH_ENABLED', true),
@@ -137,9 +137,6 @@ return [
     'bladePlacementCss'             => env('ROLES_GUI_BLADE_PLACEMENT_CSS', 'inline_template_linked_css'),
     'bladePlacementJs'              => env('ROLES_GUI_BLADE_PLACEMENT_JS', 'inline_footer_scripts'),
 
-    // Titles placement extend
-    'titleExtended'                 => env('ROLES_GUI_TITLE_EXTENDED', 'template_title'),
-
     // Switch Between bootstrap 3 `panel` and bootstrap 4 `card` classes
     'bootstapVersion'               => env('ROLES_GUI_BOOTSTRAP_VERSION', '4'),
 
@@ -165,9 +162,6 @@ return [
     // Font Awesome
     'enableFontAwesomeCDN'          => env('ROLES_GUI_FONT_AWESOME_CDN_ENABLED', true),
     'fontAwesomeCDN'                => env('ROLES_GUI_FONT_AWESOME_CDN_URL', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css'),
-
-    // Flash Messaging
-    'builtInFlashMessagesEnabled'   => env('ROLES_GUI_FLASH_MESSAGES_ENABLED', true),
 
     /*
     |--------------------------------------------------------------------------

@@ -24,7 +24,7 @@ class LaravelRolesDeletedController extends Controller
             'deletedRoleItems' => $deletedRoleItems,
         ];
 
-        return view('laravelroles::laravelroles.crud.roles.deleted.index', $data);
+        return view('laravel-roles::crud.roles.deleted.index', $data);
     }
 
     /**
@@ -39,7 +39,7 @@ class LaravelRolesDeletedController extends Controller
         $item = $this->getDeletedRole($id);
         $typeDeleted = 'deleted';
 
-        return view('laravelroles::laravelroles.crud.roles.show', compact('item', 'typeDeleted'));
+        return view('laravel-roles::crud.roles.show', compact('item', 'typeDeleted'));
     }
 
     /**
@@ -54,12 +54,12 @@ class LaravelRolesDeletedController extends Controller
         $deletedRoles = $this->restoreAllTheDeletedRoles();
 
         if ($deletedRoles['status'] === 'success') {
-            return redirect()->route('laravelroles::roles.index')
-                        ->with('success', trans_choice('laravelroles::laravelroles.flash-messages.successRestoredAllRoles', $deletedRoles['count'], ['count' => $deletedRoles['count']]));
+            return redirect()->route('laravel-roles::roles.index')
+                        ->with('success', trans_choice('laravel-roles::flash-messages.successRestoredAllRoles', $deletedRoles['count'], ['count' => $deletedRoles['count']]));
         }
 
-        return redirect()->route('laravelroles::roles.index')
-                    ->with('error', trans('laravelroles::laravelroles.flash-messages.errorRestoringAllRoles'));
+        return redirect()->route('laravel-roles::roles.index')
+                    ->with('error', trans('laravel-roles::admin.flash-messages.errorRestoringAllRoles'));
     }
 
     /**
@@ -74,8 +74,8 @@ class LaravelRolesDeletedController extends Controller
     {
         $role = $this->restoreDeletedRole($id);
 
-        return redirect()->route('laravelroles::roles.index')
-                    ->with('success', trans('laravelroles::laravelroles.flash-messages.successRestoredRole', ['role' => $role->name]));
+        return redirect()->route('laravel-roles::roles.index')
+                    ->with('success', trans('laravel-roles::admin.flash-messages.successRestoredRole', ['role' => $role->name]));
     }
 
     /**
@@ -90,12 +90,12 @@ class LaravelRolesDeletedController extends Controller
         $deletedRoles = $this->destroyAllTheDeletedRoles();
 
         if ($deletedRoles['status'] === 'success') {
-            return redirect()->route('laravelroles::roles.index')
-                        ->with('success', trans_choice('laravelroles::laravelroles.flash-messages.successDestroyedAllRoles', $deletedRoles['count'], ['count' => $deletedRoles['count']]));
+            return redirect()->route('laravel-roles::roles.index')
+                        ->with('success', trans_choice('laravel-roles::flash-messages.successDestroyedAllRoles', $deletedRoles['count'], ['count' => $deletedRoles['count']]));
         }
 
-        return redirect()->route('laravelroles::roles.index')
-                    ->with('error', trans('laravelroles::laravelroles.flash-messages.errorDestroyingAllRoles'));
+        return redirect()->route('laravel-roles::roles.index')
+                    ->with('error', trans('laravel-roles::admin.flash-messages.errorDestroyingAllRoles'));
     }
 
     /**
@@ -109,7 +109,7 @@ class LaravelRolesDeletedController extends Controller
     {
         $role = $this->destroyRole($id);
 
-        return redirect()->route('laravelroles::roles.index')
-                    ->with('success', trans('laravelroles::laravelroles.flash-messages.successDestroyedRole', ['role' => $role->name]));
+        return redirect()->route('laravel-roles::roles.index')
+                    ->with('success', trans('laravel-roles::admin.flash-messages.successDestroyedRole', ['role' => $role->name]));
     }
 }

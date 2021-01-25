@@ -3,6 +3,7 @@
 namespace jeremykenedy\LaravelRoles;
 
 use Illuminate\Routing\Router;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\ServiceProvider;
 use jeremykenedy\LaravelRoles\
 {
@@ -13,7 +14,7 @@ use jeremykenedy\LaravelRoles\
 
 class RolesServiceProvider extends ServiceProvider
 {
-    private $_packageTag = 'laravelroles';
+    private $_packageTag = 'laravel-roles';
 
     /**
      * Indicates if loading of the provider is deferred.
@@ -41,6 +42,16 @@ class RolesServiceProvider extends ServiceProvider
     }
 
     /**
+     * Get the services provided by the provider.
+     *
+     * @return array
+     */
+    public function provides(): array
+    {
+        return [];
+    }
+
+    /**
      * Bootstrap resources on any instance type.
      */
     private function bootstrap()
@@ -51,8 +62,8 @@ class RolesServiceProvider extends ServiceProvider
 
         $this->loadResources();
 
-        $this->registerBladeDirectives();
-
+        $this->bootstrapBladeComponents();
+        $this->bootstrapBladeDirectives();
     }
 
     /**
@@ -69,7 +80,7 @@ class RolesServiceProvider extends ServiceProvider
     /**
      * Bootstrap package configurations.
      */
-    private function bootstrapConfigs ()
+    private function bootstrapConfigs()
     {
         $this->mergeConfigFrom(__DIR__ . '/config/roles.php', 'roles');
     }
@@ -77,7 +88,7 @@ class RolesServiceProvider extends ServiceProvider
     /**
      * Bootstrap package middleware
      */
-    private function bootstrapMiddleware ()
+    private function bootstrapMiddleware()
     {
         $router = $this->app->make(Router::class);
 
@@ -89,7 +100,7 @@ class RolesServiceProvider extends ServiceProvider
     /**
      * Bootstrap Consumables
      */
-    private function loadResources ()
+    private function loadResources()
     {
         $this->loadTranslationsFrom(__DIR__ . '/resources/lang/', $this->_packageTag);
 
@@ -114,12 +125,17 @@ class RolesServiceProvider extends ServiceProvider
         }
     }
 
+    private function bootstrapBladeComponents ()
+    {
+        Blade::componentNamespace('jeremykenedy\\LaravelRoles\\Views\\Components', $this->_packageTag);
+    }
+
     /**
      * Register Blade Directives.
      *
      * @return void
      */
-    protected function registerBladeDirectives()
+    protected function bootstrapBladeDirectives()
     {
         $blade = $this->app['view']->getEngineResolver()->resolve('blade')->getCompiler();
 
@@ -175,15 +191,15 @@ class RolesServiceProvider extends ServiceProvider
     {
         $tag = $this->_packageTag;
 
-        $configs    = [ __DIR__ . '/config/roles.php' => config_path('roles.php') ];
+        $configs = [__DIR__ . '/config/roles.php' => config_path('roles.php')];
 
-        $seeds      = [ __DIR__ . '/Database/Seeders/publish' => database_path('seeders') ];
+        $seeds = [__DIR__ . '/Database/Seeders/publish' => database_path('seeders')];
 
-        $migrations = [ __DIR__ . '/Database/Migrations' => database_path('migrations') ];
+        $migrations = [__DIR__ . '/Database/Migrations' => database_path('migrations')];
 
-        $views      = [ __DIR__ . '/resources/views' => resource_path('views/vendor/' . $tag) ];
+        $views = [__DIR__ . '/resources/views' => resource_path('views/vendor/' . $tag)];
 
-        $languages  = [ __DIR__ . '/resources/lang' => resource_path('lang/vendor/' . $tag) ];
+        $languages = [__DIR__ . '/resources/lang' => resource_path('lang/vendor/' . $tag)];
 
         // php artisan vendor:publish --tag=laravelroles
         $this->publishes($configs + $seeds + $migrations + $views + $languages, $tag);
@@ -192,18 +208,18 @@ class RolesServiceProvider extends ServiceProvider
         $this->publishes($migrations + $languages, $tag . '-update');
 
         // php artisan vendor:publish --tag=laravelroles-configs
-        $this->publishes($configs,      $tag . '-configs');
+        $this->publishes($configs, $tag . '-configs');
 
         // php artisan vendor:publish --tag=laravelroles-migrations
-        $this->publishes($migrations,   $tag . '-migrations');
+        $this->publishes($migrations, $tag . '-migrations');
 
         // php artisan vendor:publish --tag=laravelroles-seeds
-        $this->publishes($seeds,        $tag . '-seeds');
+        $this->publishes($seeds, $tag . '-seeds');
 
         // php artisan vendor:publish --tag=laravelroles-views
-        $this->publishes($views,        $tag . '-views');
+        $this->publishes($views, $tag . '-views');
 
         // php artisan vendor:publish --tag=laravelroles-lang
-        $this->publishes($languages,    $tag . '-lang');
+        $this->publishes($languages, $tag . '-lang');
     }
 }

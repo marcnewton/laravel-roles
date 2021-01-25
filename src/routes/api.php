@@ -9,7 +9,7 @@
 
 Route::group([
     'middleware'    => ['auth:api'],
-    'as'            => 'laravelroles::',
+    'as'            => 'laravel-roles::',
     'namespace'     => 'jeremykenedy\LaravelRoles\App\Http\Controllers\Api',
     'prefix'        => 'api',
 ], function () {

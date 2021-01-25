@@ -37,7 +37,7 @@ class LaravelPermissionsController extends Controller
         $service = new PermissionFormFields();
         $data = $service->handle();
 
-        return view('laravelroles::laravelroles.crud.permissions.create', $data);
+        return view('laravel-roles::crud.permissions.create', $data);
     }
 
     /**
@@ -52,8 +52,8 @@ class LaravelPermissionsController extends Controller
         $permissionData = $request->permissionFillData();
         $permission = $this->storeNewPermission($permissionData);
 
-        return redirect()->route('laravelroles::roles.index')
-                            ->with('success', trans('laravelroles::laravelroles.flash-messages.permission-create', ['permission' => $permission->name]));
+        return redirect()->route('laravel-roles::roles.index')
+                            ->with('success', trans('laravel-roles::admin.flash-messages.permission-create', ['permission' => $permission->name]));
     }
 
     /**
@@ -67,7 +67,7 @@ class LaravelPermissionsController extends Controller
     {
         $data = $this->getPermissionItemData($id);
 
-        return view('laravelroles::laravelroles.crud.permissions.show', $data);
+        return view('laravel-roles::crud.permissions.show', $data);
     }
 
     /**
@@ -82,7 +82,7 @@ class LaravelPermissionsController extends Controller
         $service = new PermissionFormFields($id);
         $data = $service->handle();
 
-        return view('laravelroles::laravelroles.crud.permissions.edit', $data);
+        return view('laravel-roles::crud.permissions.edit', $data);
     }
 
     /**
@@ -98,8 +98,8 @@ class LaravelPermissionsController extends Controller
         $permissionData = $request->permissionFillData($id);
         $permission = $this->updatePermission($id, $permissionData);
 
-        return redirect()->route('laravelroles::roles.index')
-            ->with('success', trans('laravelroles::laravelroles.flash-messages.permission-updated', ['permission' => $permission->name]));
+        return redirect()->route('laravel-roles::roles.index')
+            ->with('success', trans('laravel-roles::admin.flash-messages.permission-updated', ['permission' => $permission->name]));
     }
 
     /**
@@ -113,7 +113,7 @@ class LaravelPermissionsController extends Controller
     {
         $permission = $this->deletePermission($id);
 
-        return redirect(route('laravelroles::roles.index'))
-                    ->with('success', trans('laravelroles::laravelroles.flash-messages.successDeletedItem', ['type' => 'Permission', 'item' => $permission->name]));
+        return redirect(route('laravel-roles::roles.index'))
+                    ->with('success', trans('laravel-roles::admin.flash-messages.successDeletedItem', ['type' => 'Permission', 'item' => $permission->name]));
     }
 }
